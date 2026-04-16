@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI & Neuronale Netze – Infografik</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a12;
+    --panel: #0b1422;
+    --border: #1a3050;
+    --cyan: #00e5ff;
+    --blue: #1a6fff;
+    --purple: #9b5de5;
+    --green: #00ff9f;
+    --orange: #ff6b35;
+    --yellow: #ffe234;
+    --red: #ff2d55;
+    --text: #c8ddf0;
+    --dim: #4a6880;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 30px 60px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    margin-top: 24px;
+  }
+  .header-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--cyan);
+    opacity: 0.6;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+  }
+  .header-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--dim);
+    margin-top: 8px;
+    letter-spacing: 3px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .card:hover { border-color: var(--cyan); }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 2px;
+    width: 40%;
+    border-radius: 8px 0 0 0;
+  }
+
+  .card-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* accent colors */
+  .acc-cyan  { color: var(--cyan);   } .acc-cyan::before  { background: var(--cyan);   }
+  .acc-blue  { color: var(--blue);   } .acc-blue::before  { background: var(--blue);   }
+  .acc-purple{ color: var(--purple); } .acc-purple::before{ background: var(--purple); }
+  .acc-green { color: var(--green);  } .acc-green::before { background: var(--green);  }
+  .acc-orange{ color: var(--orange); } .acc-orange::before{ background: var(--orange); }
+  .acc-yellow{ color: var(--yellow); } .acc-yellow::before{ background: var(--yellow); }
+  .acc-red   { color: var(--red);    } .acc-red::before   { background: var(--red);    }
+
+  /* ── SECTION LAYOUT ── */
+  section { margin-bottom: 36px; }
+  .section-header {
+    font-size: 11px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 5px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-header::before {
+    content: '//';
+    color: var(--cyan);
+    opacity: 0.5;
+  }
+
+  /* ── UMBRELLA (top hierarchy) ── */
+  .umbrella {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .umbrella-item {
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+  }
+  .umbrella-item.center {
+    border-color: var(--cyan);
+    background: rgba(0,229,255,0.04);
+    box-shadow: 0 0 30px rgba(0,229,255,0.08);
+  }
+  .umbrella-label {
+    font-size: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 3px;
+    color: var(--dim);
+    margin-bottom: 4px;
+  }
+  .umbrella-name {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .umbrella-desc {
+    font-size: 11px;
+    color: var(--dim);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* connector lines between umbrella levels */
+  .connector-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    gap: 0;
+    margin-bottom: 4px;
+  }
+  .conn-line {
+    height: 100%;
+    border-left: 1px dashed rgba(0,229,255,0.25);
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+
+  @media(max-width: 900px) {
+    .grid-4, .grid-5, .grid-6 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .umbrella { grid-template-columns: 1fr; }
+  }
+
+  /* ── TAG / CHIP ── */
+  .tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin: 2px 2px 2px 0;
+    letter-spacing: 1px;
+    border: 1px solid;
+  }
+  .tag-cyan   { color: var(--cyan);   border-color: rgba(0,229,255,0.3);   background: rgba(0,229,255,0.05); }
+  .tag-green  { color: var(--green);  border-color: rgba(0,255,159,0.3);  background: rgba(0,255,159,0.05); }
+  .tag-purple { color: var(--purple); border-color: rgba(155,93,229,0.3); background: rgba(155,93,229,0.05); }
+  .tag-orange { color: var(--orange); border-color: rgba(255,107,53,0.3); background: rgba(255,107,53,0.05); }
+  .tag-blue   { color: var(--blue);   border-color: rgba(26,111,255,0.3); background: rgba(26,111,255,0.05); }
+  .tag-yellow { color: var(--yellow); border-color: rgba(255,226,52,0.3); background: rgba(255,226,52,0.05); }
+  .tag-red    { color: var(--red);    border-color: rgba(255,45,85,0.3);  background: rgba(255,45,85,0.05); }
+
+  /* ── NEURAL NET DIAGRAM ── */
+  .nn-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  .nn-layer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  .nn-layer-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .nn-node {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 2;
+    cursor: default;
+  }
+  .nn-node:hover { transform: scale(1.2); }
+  .node-input  { border-color: var(--green);  color: var(--green);  background: rgba(0,255,159,0.08); }
+  .node-hidden { border-color: var(--cyan);   color: var(--cyan);   background: rgba(0,229,255,0.08); }
+  .node-output { border-color: var(--orange); color: var(--orange); background: rgba(255,107,53,0.08); }
+
+  .nn-arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .nn-arrows svg { opacity: 0.3; }
+
+  .nn-label-row {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 0 20px;
+  }
+  .nn-lbl {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 4px;
+    border-top: 2px solid;
+  }
+  .lbl-green  { border-color: var(--green);  color: var(--green); }
+  .lbl-cyan   { border-color: var(--cyan);   color: var(--cyan); }
+  .lbl-cyan2  { border-color: rgba(0,229,255,0.4); color: rgba(0,229,255,0.6); }
+  .lbl-orange { border-color: var(--orange); color: var(--orange); }
+
+  /* ── FLOW ARROW ── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 10px;
+  }
+  .flow-step {
+    flex: 1;
+    padding: 12px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px 0 0 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+  }
+  .flow-step + .flow-step { border-radius: 0; border-left: none; }
+  .flow-step:last-child { border-radius: 0 6px 6px 0; }
+  .flow-num {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    margin-bottom: 3px;
+  }
+
+  /* ── PROCESS RING ── */
+  .ring-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+  .ring-steps {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+  }
+  .ring-step {
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    border: 1px solid;
+    position: relative;
+  }
+  .ring-arrow {
+    color: var(--dim);
+    font-size: 14px;
+    line-height: 1;
+    align-self: center;
+  }
+
+  /* ── PARAM LIST ── */
+  .param-list {
+    list-style: none;
+  }
+  .param-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(26,48,80,0.5);
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .param-list li:last-child { border-bottom: none; }
+  .param-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+  .param-val {
+    color: var(--dim);
+    font-size: 11px;
+  }
+
+  /* ── MODEL BADGE ── */
+  .model-badge {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .model-badge:hover {
+    background: rgba(255,255,255,0.03);
+    transform: translateY(-2px);
+  }
+  .model-year {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* ── HARDWARE BAR ── */
+  .hw-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .hw-item {
+    flex: 1;
+    min-width: 100px;
+    padding: 14px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .hw-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .hw-name {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .hw-desc {
+    font-size: 10px;
+    color: var(--dim);
+    margin-top: 3px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* ── BOTTOM LEGEND ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(0,0,0,0.3);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--dim);
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Scan-line animation on hover */
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+  .card:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 49%, rgba(0,229,255,0.04) 50%, transparent 51%);
+    pointer-events: none;
+    animation: scanline 1.5s linear;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  /* glow pulse */
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0,229,255,0.05); }
+    50% { box-shadow: 0 0 40px rgba(0,229,255,0.12); }
+  }
+  .card.glow-pulse { animation: glow 4s ease-in-out infinite; }
+
+  /* fade-in on load */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  section, .umbrella-section { animation: fadeUp 0.6s ease both; }
+  section:nth-child(1){ animation-delay: 0.05s; }
+  section:nth-child(2){ animation-delay: 0.10s; }
+  section:nth-child(3){ animation-delay: 0.15s; }
+  section:nth-child(4){ animation-delay: 0.20s; }
+  section:nth-child(5){ animation-delay: 0.25s; }
+  section:nth-child(6){ animation-delay: 0.30s; }
+  section:nth-child(7){ animation-delay: 0.35s; }
+  section:nth-child(8){ animation-delay: 0.40s; }
+  section:nth-child(9){ animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-label">Wissensstruktur</div>
+    <h1>KI · Neuronale Netze · Architektur</h1>
+    <div class="header-sub">// Übersicht der Konzepte, Strukturen & Zusammenhänge</div>
+  </header>
+
+  <!-- 1. HIERARCHIE -->
+  <section>
+    <div class="section-header">Hierarchie</div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+
+      <!-- Top level -->
+      <div style="width:100%;max-width:560px;">
+        <div class="umbrella-item center" style="border-color:var(--cyan);">
+          <div class="umbrella-label">ÜBERGEORDNET</div>
+          <div class="umbrella-name" style="color:var(--cyan);">Artificial Intelligence</div>
+          <div class="umbrella-desc">Jedes System, das intelligentes Verhalten imitiert</div>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="height:20px;border-left:1px dashed rgba(0,229,255,0.3);"></div>
+
+      <!-- ML -->
+      <div style="width:100%;max-width:700px;display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:4px;">
+        <div class="umbrella-item" style="border-color:var(--blue);display:flex;flex-direction:column;justify-content:center;">
+          <div class="umbrella-label">KLASSISCH</div>
+          <div class="umbrella-name" style="color:var(--blue);font-size:15px;">Regelbasierte&nbsp;KI</div>
+          <div class="umbrella-desc">Expert Systems, Logikregeln, Entscheidungsbäume</div>
+        </div>
+        <div class="umbrella-item" style="border-color:var(--blue);">
+          <div class="umbrella-label">TEILBEREICH</div>
+          <div class="umbrella-name" style="color:var(--blue);">Machine Learning</div>
+          <div class="umbrella-desc">Lernt aus Daten, ohne explizit programmiert zu sein</div>
+        </div>
+        <div class="umbrella-item" style="display:flex;flex-direction:column;justify-content:center;">
+          <div class="umbrella-label">SONSTIGES</div>
+          <div class="umbrella-name" style="color:var(--dim);font-size:14px;">Genetische Algos, Fuzzy Logic …</div>
+        </div>
+      </div>
+
+      <div style="height:20px;border-left:1px dashed rgba(26,111,255,0.4);margin-left:0;"></div>
+
+      <!-- Deep Learning -->
+      <div style="width:100%;max-width:800px;display:grid;grid-template-columns:1fr 1.2fr 1fr 1fr;gap:4px;">
+        <div class="umbrella-item">
+          <div class="umbrella-label">KLASSISCHES ML</div>
+          <div style="font-size:12px;font-weight:700;color:var(--dim);">SVM · k-NN · Random Forest · Naive Bayes</div>
+        </div>
+        <div class="umbrella-item" style="border-color:var(--purple);">
+          <div class="umbrella-label">TEILBEREICH VON ML</div>
+          <div class="umbrella-name" style="color:var(--purple);font-size:18px;">Deep Learning</div>
+          <div class="umbrella-desc">Viele Schichten → automatisches Feature-Lernen</div>
+        </div>
+        <div class="umbrella-item">
+          <div class="umbrella-label">AUCH ML</div>
+          <div style="font-size:12px;font-weight:700;color:var(--dim);">Reinforcement Learning</div>
+        </div>
+        <div class="umbrella-item">
+          <div class="umbrella-label">AUCH ML</div>
+          <div style="font-size:12px;font-weight:700;color:var(--dim);">Unsupervised Learning</div>
+        </div>
+      </div>
+
+      <div style="height:20px;border-left:1px dashed rgba(155,93,229,0.4);"></div>
+
+      <!-- Neural Nets -->
+      <div style="width:100%;max-width:500px;">
+        <div class="umbrella-item" style="border-color:var(--green);background:rgba(0,255,159,0.03);">
+          <div class="umbrella-label">KERN VON DEEP LEARNING</div>
+          <div class="umbrella-name" style="color:var(--green);">Neuronale Netze</div>
+          <div class="umbrella-desc">Schichten verbundener Neuronen · lernen durch Backpropagation</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. NEURONALES NETZ AUFBAU -->
+  <section>
+    <div class="section-header">Aufbau eines Neuronalen Netzes</div>
+    <div class="card acc-green glow-pulse">
+      <div class="card-title acc-green">Layer-Struktur</div>
+
+      <!-- Diagram -->
+      <div class="nn-diagram">
+        <!-- Input -->
+        <div class="nn-layer">
+          <div class="nn-layer-label">INPUT</div>
+          <div class="nn-node node-input">x₁</div>
+          <div class="nn-node node-input">x₂</div>
+          <div class="nn-node node-input">x₃</div>
+          <div class="nn-node node-input">x₄</div>
+        </div>
+        <!-- arrows -->
+        <div class="nn-arrows">
+          <svg width="40" height="120" viewBox="0 0 40 120">
+            <line x1="2" y1="10" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="10" x2="36" y2="60" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="10" x2="36" y2="90" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="40" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="40" x2="36" y2="60" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="40" x2="36" y2="90" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="70" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="70" x2="36" y2="60" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="70" x2="36" y2="90" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="100" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="100" x2="36" y2="60" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="100" x2="36" y2="90" stroke="var(--cyan)" stroke-width="0.7"/>
+          </svg>
+        </div>
+        <!-- Hidden 1 -->
+        <div class="nn-layer">
+          <div class="nn-layer-label">HIDDEN 1</div>
+          <div class="nn-node node-hidden">h</div>
+          <div class="nn-node node-hidden">h</div>
+          <div class="nn-node node-hidden">h</div>
+        </div>
+        <div class="nn-arrows">
+          <svg width="40" height="100" viewBox="0 0 40 100">
+            <line x1="2" y1="15" x2="36" y2="15" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="15" x2="36" y2="50" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="15" x2="36" y2="85" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="50" x2="36" y2="15" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="50" x2="36" y2="50" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="50" x2="36" y2="85" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="85" x2="36" y2="15" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="85" x2="36" y2="50" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="85" x2="36" y2="85" stroke="var(--cyan)" stroke-width="0.7"/>
+          </svg>
+        </div>
+        <!-- Hidden 2 -->
+        <div class="nn-layer">
+          <div class="nn-layer-label">HIDDEN 2…N</div>
+          <div class="nn-node node-hidden">h</div>
+          <div class="nn-node node-hidden">h</div>
+          <div class="nn-node node-hidden">h</div>
+          <div style="color:var(--dim);font-size:18px;text-align:center;">⋮</div>
+        </div>
+        <div class="nn-arrows">
+          <svg width="40" height="100" viewBox="0 0 40 100">
+            <line x1="2" y1="15" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="15" x2="36" y2="70" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="50" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="50" x2="36" y2="70" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="85" x2="36" y2="30" stroke="var(--cyan)" stroke-width="0.7"/>
+            <line x1="2" y1="85" x2="36" y2="70" stroke="var(--cyan)" stroke-width="0.7"/>
+          </svg>
+        </div>
+        <!-- Output -->
+        <div class="nn-layer">
+          <div class="nn-layer-label">OUTPUT</div>
+          <div class="nn-node node-output">ŷ₁</div>
+          <div class="nn-node node-output">ŷ₂</div>
+        </div>
+      </div>
+
+      <!-- Layer labels -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-top:14px;padding:0 20px;">
+        <div style="border-top:2px solid var(--green);padding-top:6px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;color:var(--green);">Input Layer</div>
+          <div style="font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Rohdaten rein</div>
+        </div>
+        <div style="border-top:2px solid var(--cyan);padding-top:6px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;color:var(--cyan);">Hidden Layers</div>
+          <div style="font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Feature-Extraktion</div>
+        </div>
+        <div style="border-top:2px solid rgba(0,229,255,0.3);padding-top:6px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;color:rgba(0,229,255,0.5);">Tiefe → Komplexität</div>
+          <div style="font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">mehr Layer = Deep</div>
+        </div>
+        <div style="border-top:2px solid var(--orange);padding-top:6px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;color:var(--orange);">Output Layer</div>
+          <div style="font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Vorhersage raus</div>
+        </div>
+      </div>
+
+      <!-- Single Neuron detail -->
+      <div style="margin-top:18px;padding:14px;border:1px solid var(--border);border-radius:6px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;">EINZELNES NEURON:</div>
+        <span class="tag tag-green">Eingaben xᵢ</span>
+        <span style="color:var(--dim);">×</span>
+        <span class="tag tag-cyan">Gewichte wᵢ</span>
+        <span style="color:var(--dim);">+</span>
+        <span class="tag tag-blue">Bias b</span>
+        <span style="color:var(--dim);">→</span>
+        <span class="tag tag-purple">Aktivierungsfunktion</span>
+        <span style="color:var(--dim);">→</span>
+        <span class="tag tag-orange">Output a</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. NETZ-TYPEN -->
+  <section>
+    <div class="section-header">Netzwerk-Architekturen</div>
+    <div class="grid-4">
+
+      <div class="card acc-cyan">
+        <div class="card-title acc-cyan">CNN</div>
+        <div style="font-weight:700;margin-bottom:6px;">Convolutional Neural Net</div>
+        <div class="tag tag-cyan">Conv Layer</div>
+        <div class="tag tag-cyan">Pooling</div>
+        <div class="tag tag-cyan">Flatten</div>
+        <div class="tag tag-cyan">Fully Connected</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Bilder · Video · Spatial Data</div>
+      </div>
+
+      <div class="card acc-purple">
+        <div class="card-title acc-purple">RNN / LSTM / GRU</div>
+        <div style="font-weight:700;margin-bottom:6px;">Recurrent Neural Net</div>
+        <div class="tag tag-purple">Hidden State</div>
+        <div class="tag tag-purple">Sequenz-Loop</div>
+        <div class="tag tag-purple">Gates (LSTM)</div>
+        <div class="tag tag-purple">Forget Gate</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Text · Zeitreihen · Audio</div>
+      </div>
+
+      <div class="card acc-orange">
+        <div class="card-title acc-orange">Transformer</div>
+        <div style="font-weight:700;margin-bottom:6px;">Attention-Architektur</div>
+        <div class="tag tag-orange">Self-Attention</div>
+        <div class="tag tag-orange">Multi-Head</div>
+        <div class="tag tag-orange">Positional Enc.</div>
+        <div class="tag tag-orange">Encoder/Decoder</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ NLP · LLMs · Vision (ViT)</div>
+      </div>
+
+      <div class="card acc-red">
+        <div class="card-title acc-red">GAN</div>
+        <div style="font-weight:700;margin-bottom:6px;">Generative Adversarial Net</div>
+        <div class="tag tag-red">Generator G</div>
+        <div class="tag tag-red">Discriminator D</div>
+        <div class="tag tag-red">Adversarial Loss</div>
+        <div class="tag tag-red">Latent Space</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Bild-Generierung · Deepfakes</div>
+      </div>
+
+      <div class="card acc-blue">
+        <div class="card-title acc-blue">Autoencoder</div>
+        <div style="font-weight:700;margin-bottom:6px;">Encoder + Decoder</div>
+        <div class="tag tag-blue">Bottleneck</div>
+        <div class="tag tag-blue">Latent Vector</div>
+        <div class="tag tag-blue">Rekonstruktion</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Kompression · Denoising</div>
+      </div>
+
+      <div class="card acc-yellow">
+        <div class="card-title acc-yellow">VAE</div>
+        <div style="font-weight:700;margin-bottom:6px;">Variational Autoencoder</div>
+        <div class="tag tag-yellow">μ + σ Sampling</div>
+        <div class="tag tag-yellow">KL-Divergenz</div>
+        <div class="tag tag-yellow">Generativ</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Bild-Generierung · Interpolation</div>
+      </div>
+
+      <div class="card acc-green">
+        <div class="card-title acc-green">Diffusion Model</div>
+        <div style="font-weight:700;margin-bottom:6px;">Rauschen → Bild</div>
+        <div class="tag tag-green">Forward Noising</div>
+        <div class="tag tag-green">Denoising Steps</div>
+        <div class="tag tag-green">U-Net Backbone</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Stable Diffusion · DALL-E</div>
+      </div>
+
+      <div class="card acc-cyan">
+        <div class="card-title acc-cyan">GNN</div>
+        <div style="font-weight:700;margin-bottom:6px;">Graph Neural Net</div>
+        <div class="tag tag-cyan">Nodes</div>
+        <div class="tag tag-cyan">Edges</div>
+        <div class="tag tag-cyan">Message Passing</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--dim);">→ Moleküle · Social Graphs</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. LERN-PARADIGMEN -->
+  <section>
+    <div class="section-header">Lern-Paradigmen</div>
+    <div class="grid-3">
+
+      <div class="card acc-cyan">
+        <div class="card-title acc-cyan">Supervised Learning</div>
+        <div style="font-size:12px;margin-bottom:8px;color:var(--text);">Gelabelte Daten <span style="color:var(--dim)">→</span> Vorhersage</div>
+        <div class="tag tag-cyan">Classification</div>
+        <div class="tag tag-cyan">Regression</div>
+        <div class="tag tag-cyan">Object Detection</div>
+        <div style="margin-top:8px;font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Training: Input + Label → Loss → Update</div>
+      </div>
+
+      <div class="card acc-purple">
+        <div class="card-title acc-purple">Unsupervised Learning</div>
+        <div style="font-size:12px;margin-bottom:8px;color:var(--text);">Keine Labels <span style="color:var(--dim)">→</span> Struktur finden</div>
+        <div class="tag tag-purple">Clustering (k-Means)</div>
+        <div class="tag tag-purple">Dimensionsredukton</div>
+        <div class="tag tag-purple">PCA · t-SNE · UMAP</div>
+        <div class="tag tag-purple">Generierung</div>
+        <div style="margin-top:8px;font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Training: Input → Muster entdecken</div>
+      </div>
+
+      <div class="card acc-orange">
+        <div class="card-title acc-orange">Reinforcement Learning</div>
+        <div style="font-size:12px;margin-bottom:8px;color:var(--text);">Agent · Umgebung · Belohnung</div>
+        <div class="tag tag-orange">Policy π</div>
+        <div class="tag tag-orange">Reward R</div>
+        <div class="tag tag-orange">State S</div>
+        <div class="tag tag-orange">Q-Learning</div>
+        <div class="tag tag-orange">PPO · A3C</div>
+        <div style="margin-top:8px;font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Ziel: kummulierten Reward maximieren</div>
+      </div>
+
+    </div>
+    <div style="margin-top:10px;" class="grid-3">
+      <div class="card acc-green">
+        <div class="card-title acc-green">Self-Supervised</div>
+        <div style="font-size:12px;margin-bottom:6px;color:var(--text);">Selbst generierte Labels</div>
+        <div class="tag tag-green">Contrastive Learning</div>
+        <div class="tag tag-green">Masked Prediction</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:6px;font-family:'Share Tech Mono',monospace;">z.B. BERT: Masked Language Model</div>
+      </div>
+      <div class="card acc-blue">
+        <div class="card-title acc-blue">Transfer Learning</div>
+        <div style="font-size:12px;margin-bottom:6px;color:var(--text);">Vortrainiertes Modell adaptieren</div>
+        <div class="tag tag-blue">Pre-training</div>
+        <div class="tag tag-blue">Fine-tuning</div>
+        <div class="tag tag-blue">Frozen Layers</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:6px;font-family:'Share Tech Mono',monospace;">weniger Daten · schneller</div>
+      </div>
+      <div class="card acc-yellow">
+        <div class="card-title acc-yellow">Few-Shot / Zero-Shot</div>
+        <div style="font-size:12px;margin-bottom:6px;color:var(--text);">Wenige oder keine Beispiele</div>
+        <div class="tag tag-yellow">Prompting</div>
+        <div class="tag tag-yellow">Meta-Learning</div>
+        <div class="tag tag-yellow">In-Context Learning</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:6px;font-family:'Share Tech Mono',monospace;">typisch für LLMs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TRAINING PROZESS -->
+  <section>
+    <div class="section-header">Training-Prozess</div>
+    <div class="card acc-blue">
+      <div class="card-title acc-blue">Trainings-Loop</div>
+      <div class="ring-container">
+        <div class="ring-steps">
+          <div class="ring-step" style="border-color:var(--green);color:var(--green);">① Daten laden</div>
+          <div class="ring-arrow">→</div>
+          <div class="ring-step" style="border-color:var(--cyan);color:var(--cyan);">② Forward Pass</div>
+          <div class="ring-arrow">→</div>
+          <div class="ring-step" style="border-color:var(--orange);color:var(--orange);">③ Loss berechnen</div>
+          <div class="ring-arrow">→</div>
+          <div class="ring-step" style="border-color:var(--purple);color:var(--purple);">④ Backpropagation</div>
+          <div class="ring-arrow">→</div>
+          <div class="ring-step" style="border-color:var(--yellow);color:var(--yellow);">⑤ Gradient Descent</div>
+          <div class="ring-arrow">→</div>
+          <div class="ring-step" style="border-color:var(--blue);color:var(--blue);">⑥ Weights updaten</div>
+          <div class="ring-arrow" style="color:var(--green);">↺</div>
+        </div>
+      </div>
+    </div>
+    <!-- Hyperparameter -->
+    <div style="margin-top:10px;" class="grid-2">
+      <div class="card acc-purple">
+        <div class="card-title acc-purple">Hyperparameter</div>
+        <ul class="param-list">
+          <li><span class="param-name" style="color:var(--cyan);">Learning Rate</span><span class="param-val">Schrittgröße beim Gradient Descent</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Batch Size</span><span class="param-val">Anzahl Samples pro Update</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Epochs</span><span class="param-val">Wie oft über alle Daten iteriert wird</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Dropout</span><span class="param-val">Zufällige Neuronen deaktivieren → Regularisierung</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Optimizer</span><span class="param-val">SGD · Adam · AdamW · RMSprop</span></li>
+        </ul>
+      </div>
+      <div class="card acc-orange">
+        <div class="card-title acc-orange">Aktivierungsfunktionen</div>
+        <ul class="param-list">
+          <li><span class="param-name" style="color:var(--orange);">ReLU</span><span class="param-val">max(0, x) – Standard Hidden</span></li>
+          <li><span class="param-name" style="color:var(--orange);">Sigmoid</span><span class="param-val">0…1 – Binary Classification Output</span></li>
+          <li><span class="param-name" style="color:var(--orange);">Softmax</span><span class="param-val">Wahrscheinlichkeitsverteilung → Multi-Class</span></li>
+          <li><span class="param-name" style="color:var(--orange);">Tanh</span><span class="param-val">-1…1 – zentriert</span></li>
+          <li><span class="param-name" style="color:var(--orange);">GELU</span><span class="param-val">Transformers & moderne LLMs</span></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Loss Functions -->
+    <div style="margin-top:10px;" class="card acc-red">
+      <div class="card-title acc-red">Loss-Funktionen</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+        <span class="tag tag-red">Cross-Entropy (Klassifikation)</span>
+        <span class="tag tag-red">MSE / MAE (Regression)</span>
+        <span class="tag tag-red">Binary Cross-Entropy</span>
+        <span class="tag tag-red">Huber Loss</span>
+        <span class="tag tag-red">CTC Loss (Sequenzen)</span>
+        <span class="tag tag-red">Contrastive Loss</span>
+        <span class="tag tag-red">KL-Divergenz (VAE)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. BEKANNTE MODELLE / LLMs -->
+  <section>
+    <div class="section-header">Bekannte Modelle & Familien</div>
+    <div class="grid-3" style="margin-bottom:10px;">
+      <div class="card acc-orange">
+        <div class="card-title acc-orange">Language Models (LLMs)</div>
+        <div class="grid-2" style="gap:6px;">
+          <div class="model-badge" style="border-color:rgba(255,107,53,0.3);color:var(--orange);">GPT-4 / GPT-4o<span class="model-year">OpenAI</span></div>
+          <div class="model-badge" style="border-color:rgba(0,229,255,0.3);color:var(--cyan);">Claude 3 / 3.5<span class="model-year">Anthropic</span></div>
+          <div class="model-badge" style="border-color:rgba(0,255,159,0.3);color:var(--green);">Gemini 1.5<span class="model-year">Google</span></div>
+          <div class="model-badge" style="border-color:rgba(155,93,229,0.3);color:var(--purple);">LLaMA 3<span class="model-year">Meta (open)</span></div>
+          <div class="model-badge" style="border-color:rgba(26,111,255,0.3);color:var(--blue);">Mistral<span class="model-year">Mistral AI</span></div>
+          <div class="model-badge" style="border-color:rgba(255,226,52,0.3);color:var(--yellow);">Phi-3<span class="model-year">Microsoft</span></div>
+        </div>
+      </div>
+      <div class="card acc-purple">
+        <div class="card-title acc-purple">Bild-Generierung</div>
+        <div class="grid-2" style="gap:6px;">
+          <div class="model-badge" style="border-color:rgba(155,93,229,0.3);color:var(--purple);">Stable Diffusion<span class="model-year">Stability AI</span></div>
+          <div class="model-badge" style="border-color:rgba(255,107,53,0.3);color:var(--orange);">DALL-E 3<span class="model-year">OpenAI</span></div>
+          <div class="model-badge" style="border-color:rgba(0,229,255,0.3);color:var(--cyan);">Midjourney<span class="model-year">Midjourney</span></div>
+          <div class="model-badge" style="border-color:rgba(0,255,159,0.3);color:var(--green);">Flux<span class="model-year">Black Forest Labs</span></div>
+        </div>
+      </div>
+      <div class="card acc-cyan">
+        <div class="card-title acc-cyan">Vision / Speech / Multimodal</div>
+        <div class="grid-2" style="gap:6px;">
+          <div class="model-badge" style="border-color:rgba(0,229,255,0.3);color:var(--cyan);">CLIP<span class="model-year">Bild + Text</span></div>
+          <div class="model-badge" style="border-color:rgba(0,255,159,0.3);color:var(--green);">Whisper<span class="model-year">Speech → Text</span></div>
+          <div class="model-badge" style="border-color:rgba(26,111,255,0.3);color:var(--blue);">SAM<span class="model-year">Segmentierung</span></div>
+          <div class="model-badge" style="border-color:rgba(155,93,229,0.3);color:var(--purple);">YOLO v9<span class="model-year">Object Detection</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Transformer Architektur Subteile -->
+    <div class="card acc-orange">
+      <div class="card-title acc-orange">Transformer – Interne Struktur</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+        <span class="tag tag-orange">Token Embedding</span>
+        <span style="color:var(--dim)">→</span>
+        <span class="tag tag-orange">Positional Encoding</span>
+        <span style="color:var(--dim)">→</span>
+        <span class="tag tag-orange">Multi-Head Attention</span>
+        <span style="color:var(--dim)">→</span>
+        <span class="tag tag-orange">Add & Norm</span>
+        <span style="color:var(--dim)">→</span>
+        <span class="tag tag-orange">Feed-Forward Network</span>
+        <span style="color:var(--dim)">→</span>
+        <span class="tag tag-orange">Add & Norm</span>
+        <span style="color:var(--dim)">→</span>
+        <span class="tag tag-orange">Output Projection</span>
+        <div style="width:100%;height:0;"></div>
+        <span style="font-size:10px;color:var(--dim);font-family:'Share Tech Mono',monospace;">Attention: Q·K^T / √dk → Softmax → ×V</span>
+        <span class="tag tag-yellow">Encoder-only: BERT</span>
+        <span class="tag tag-yellow">Decoder-only: GPT</span>
+        <span class="tag tag-yellow">Enc+Dec: T5 · BART</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ANWENDUNGSGEBIETE -->
+  <section>
+    <div class="section-header">Anwendungsgebiete</div>
+    <div class="grid-4">
+      <div class="card acc-cyan">
+        <div class="card-title acc-cyan">NLP</div>
+        <div class="tag tag-cyan">Übersetzung</div>
+        <div class="tag tag-cyan">Chatbots</div>
+        <div class="tag tag-cyan">Sentiment</div>
+        <div class="tag tag-cyan">Zusammenfassung</div>
+        <div class="tag tag-cyan">Code-Generierung</div>
+      </div>
+      <div class="card acc-blue">
+        <div class="card-title acc-blue">Computer Vision</div>
+        <div class="tag tag-blue">Bildklassifikation</div>
+        <div class="tag tag-blue">Object Detection</div>
+        <div class="tag tag-blue">Segmentierung</div>
+        <div class="tag tag-blue">Gesichtserkennung</div>
+        <div class="tag tag-blue">Medizin-Bildgebung</div>
+      </div>
+      <div class="card acc-purple">
+        <div class="card-title acc-purple">Generative KI</div>
+        <div class="tag tag-purple">Text → Bild</div>
+        <div class="tag tag-purple">Text → Video</div>
+        <div class="tag tag-purple">Music Generation</div>
+        <div class="tag tag-purple">3D-Modelle</div>
+        <div class="tag tag-purple">Code Completion</div>
+      </div>
+      <div class="card acc-orange">
+        <div class="card-title acc-orange">Weitere Felder</div>
+        <div class="tag tag-orange">Spiele (AlphaGo)</div>
+        <div class="tag tag-orange">Robotik</div>
+        <div class="tag tag-orange">Autonomes Fahren</div>
+        <div class="tag tag-orange">Drug Discovery</div>
+        <div class="tag tag-orange">Finanzen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FRAMEWORKS & HARDWARE -->
+  <section>
+    <div class="section-header">Frameworks · Tools · Hardware</div>
+    <div class="grid-2" style="gap:10px;">
+
+      <div class="card acc-green">
+        <div class="card-title acc-green">Frameworks & Bibliotheken</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span class="tag tag-green">PyTorch</span>
+          <span class="tag tag-green">TensorFlow</span>
+          <span class="tag tag-green">Keras</span>
+          <span class="tag tag-cyan">JAX</span>
+          <span class="tag tag-cyan">Hugging Face 🤗</span>
+          <span class="tag tag-blue">ONNX</span>
+          <span class="tag tag-blue">OpenCV</span>
+          <span class="tag tag-blue">scikit-learn</span>
+          <span class="tag tag-purple">LangChain</span>
+          <span class="tag tag-purple">LlamaIndex</span>
+          <span class="tag tag-yellow">Weights & Biases</span>
+          <span class="tag tag-yellow">MLflow</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="hw-bar">
+          <div class="hw-item" style="border-color:rgba(0,229,255,0.3);">
+            <span class="hw-icon">🖥️</span>
+            <div class="hw-name" style="color:var(--cyan);">GPU</div>
+            <div class="hw-desc">Training · Inferenz<br>NVIDIA CUDA<br>VRAM kritisch</div>
+          </div>
+          <div class="hw-item" style="border-color:rgba(0,255,159,0.3);">
+            <span class="hw-icon">⚡</span>
+            <div class="hw-name" style="color:var(--green);">TPU</div>
+            <div class="hw-desc">Google-spezifisch<br>Matrix-Ops<br>Cloud</div>
+          </div>
+          <div class="hw-item" style="border-color:rgba(155,93,229,0.3);">
+            <span class="hw-icon">🧠</span>
+            <div class="hw-name" style="color:var(--purple);">NPU</div>
+            <div class="hw-desc">Edge-Devices<br>Apple Neural Engine<br>Qualcomm AI</div>
+          </div>
+          <div class="hw-item" style="border-color:rgba(255,226,52,0.3);">
+            <span class="hw-icon">☁️</span>
+            <div class="hw-name" style="color:var(--yellow);">Cloud</div>
+            <div class="hw-desc">AWS · GCP · Azure<br>Colab · Runpod<br>Skalierbar</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. BEKANNTE KONZEPTE / BUZZWORDS -->
+  <section>
+    <div class="section-header">Wichtige Konzepte & Begriffe</div>
+    <div class="grid-3">
+      <div class="card acc-yellow">
+        <div class="card-title acc-yellow">Regularisierung / Probleme</div>
+        <ul class="param-list">
+          <li><span class="param-name" style="color:var(--yellow);">Overfitting</span><span class="param-val">Modell lernt Training auswendig</span></li>
+          <li><span class="param-name" style="color:var(--yellow);">Underfitting</span><span class="param-val">Modell zu simpel</span></li>
+          <li><span class="param-name" style="color:var(--yellow);">Dropout</span><span class="param-val">Random Neuronen = Regularisierung</span></li>
+          <li><span class="param-name" style="color:var(--yellow);">Batch Norm</span><span class="param-val">Normiert Layer-Outputs</span></li>
+          <li><span class="param-name" style="color:var(--yellow);">Vanishing Grad</span><span class="param-val">Gradient → 0 bei tiefen Netzen</span></li>
+          <li><span class="param-name" style="color:var(--yellow);">Data Augment.</span><span class="param-val">Mehr Vielfalt durch Manipulation</span></li>
+        </ul>
+      </div>
+      <div class="card acc-purple">
+        <div class="card-title acc-purple">LLM-Spezifisch</div>
+        <ul class="param-list">
+          <li><span class="param-name" style="color:var(--purple);">Token</span><span class="param-val">Kleinste Einheit eines Texts</span></li>
+          <li><span class="param-name" style="color:var(--purple);">Context Window</span><span class="param-val">Maximale Tokens pro Anfrage</span></li>
+          <li><span class="param-name" style="color:var(--purple);">Temperature</span><span class="param-val">Kreativität / Zufälligkeit</span></li>
+          <li><span class="param-name" style="color:var(--purple);">RLHF</span><span class="param-val">Reinforcement Learning from Human Feedback</span></li>
+          <li><span class="param-name" style="color:var(--purple);">RAG</span><span class="param-val">Retrieval Augmented Generation</span></li>
+          <li><span class="param-name" style="color:var(--purple);">Prompt Eng.</span><span class="param-val">Optimale Eingabe-Formulierung</span></li>
+        </ul>
+      </div>
+      <div class="card acc-cyan">
+        <div class="card-title acc-cyan">Daten-Pipeline</div>
+        <ul class="param-list">
+          <li><span class="param-name" style="color:var(--cyan);">Trainingsdaten</span><span class="param-val">Gelabelte Beispiele zum Lernen</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Validation Set</span><span class="param-val">Hyperparameter-Tuning</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Test Set</span><span class="param-val">Finale Evaluierung</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Preprocessing</span><span class="param-val">Normalisierung · Cleaning</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Feature Eng.</span><span class="param-val">Relevante Merkmale extrahieren</span></li>
+          <li><span class="param-name" style="color:var(--cyan);">Embedding</span><span class="param-val">Daten → dichte Vektoren</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--cyan)"></div>Kern-Konzepte</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Architekturen</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>Modelle / LLMs</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Frameworks</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Probleme / Tuning</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Daten / Prozess</div>
+    <div style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);">KI & NEURONALE NETZE // ÜBERSICHT</div>
+  </div>
+
+</div>
+</body>
+</html>
